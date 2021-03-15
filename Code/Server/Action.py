@@ -1,10 +1,12 @@
 import math
-from Control import *
-from Servo import *
+from .Control import Control
+from .subsystem import servo
+
+
 class Action:
     def __init__(self):
-        self.servo=Servo()
-        self.control=Control()
+        self.servo = servo()
+        self.control = Control()
         self.servo.setServoAngle(15,90)
     def push_ups(self):
         xyz=[[0,50,0],[-100,23,0],[-100,23,0],[0,50,0]]
@@ -196,8 +198,7 @@ class Action:
                 self.control.point[i][1]+=xyz[i][1]
                 self.control.point[i][2]+=xyz[i][2]
             self.control.run()
-            time.sleep(0.02)
-        
+            time.sleep(0.02)     
     def coquettish(self):
         xyz=[[80,80,0],[-30,120,0],[-30,120,0],[80,80,0]]
         for i in range(4):
@@ -236,8 +237,7 @@ class Action:
                     self.control.point[i][1]+=xyz[i][1]
                     self.control.point[i][2]+=xyz[i][2]
                 self.control.run()
-                time.sleep(0.02)
-                
+                time.sleep(0.02)               
     def swim(self):
         z=100*math.cos(45/180*math.pi)+23
         x=100*math.sin(45/180*math.pi)
@@ -292,8 +292,7 @@ class Action:
                 self.control.point[i][2]+=xyz[i][2]
             self.control.run()
             time.sleep(0.02)
-        time.sleep(1)
-        
+        time.sleep(1)    
     def yoga(self):
         xyz=[[55,78,0],[55,78,0],[55,78,0],[55,78,0]]
         for i in range(4):

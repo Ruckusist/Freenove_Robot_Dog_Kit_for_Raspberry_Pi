@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import sys,getopt
-from ui_server import Ui_server
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from Server import *
+
+from .subsystem import server_ui as Ui_server
+from .Server import Server, threading, stop_thread
 
 class MyWindow(QMainWindow,Ui_server):
     def __init__(self):

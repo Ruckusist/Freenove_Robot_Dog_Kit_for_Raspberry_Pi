@@ -4,17 +4,17 @@ import math
 import smbus
 import copy
 import threading
-from IMU import *
-from PID import *
 import numpy as np
-from Servo import *
-from Command import COMMAND as cmd
+
+from .IMU import IMU
+
+from .subsystem import servo, cmd, pid
 
 class Control:
     def __init__(self):
-        self.imu=IMU()
-        self.servo=Servo()
-        self.pid = Incremental_PID(0.5,0.0,0.0025)
+        self.imu = IMU()
+        self.servo = servo()
+        self.pid = pid(0.5,0.0,0.0025)
         self.speed = 8
         self.height = 99
         self.timeout = 0

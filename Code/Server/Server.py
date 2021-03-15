@@ -7,25 +7,21 @@ import socket
 import struct
 import picamera
 import threading
-from Led import *
-from Servo import *
-from Thread import *
-from Buzzer import *
-from Control import *
-from ADS7830 import *
-from Ultrasonic import *
-from Command import COMMAND as cmd
+
+from .subsystem import LED, servo, buzzer, ads, sonar, cmd
+from .Thread import *  # this one is still a mess.
+from .Control import Control
 
 class Server:
     def __init__(self):
         
         self.tcp_flag=False
-        self.led=Led()
-        self.servo=Servo()
-        self.adc=ADS7830()
-        self.buzzer=Buzzer()
-        self.control=Control()
-        self.sonic=Ultrasonic()
+        self.led = LED()
+        self.servo = servo()
+        self.adc = ads()
+        self.buzzer = buzzer()
+        self.control = Control()
+        self.sonic = sonar()
         self.control.Thread_conditiona.start()
         self.battery_voltage=[8.4,8.4,8.4,8.4,8.4]
     def get_interface_ip(self):
