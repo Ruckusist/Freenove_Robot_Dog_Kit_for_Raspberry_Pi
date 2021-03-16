@@ -1,7 +1,10 @@
-import time
-from Led import *
-led=Led()
+import time, sys
+
+from .subsystem import LED, Color, sonar, servo, ads, buzzer
+
+
 def test_Led():
+    led = LED()
     try:
         #Red wipe
         print ("\nRed wipe")
@@ -32,9 +35,8 @@ def test_Led():
         led.colorWipe(led.strip, Color(0, 0, 0))   #turn off the light
         print ("\nEnd of program")
 
-from Ultrasonic import *
-ultrasonic=Ultrasonic()                
 def test_Ultrasonic():
+    ultrasonic = sonar()
     try:
         while True:
             data=ultrasonic.getDistance()   #Get the value
@@ -43,9 +45,8 @@ def test_Ultrasonic():
     except KeyboardInterrupt:
         print ("\nEnd of program")
 
-from Servo import *
-servo=Servo()
 def test_Servo():
+    servo = servo()
     try:
         for i in range(90):
             servo.setServoAngle(4,90-i)
@@ -68,13 +69,11 @@ def test_Servo():
         print ("\nEnd of program")      
     except KeyboardInterrupt:
         print ("\nEnd of program")
-        
-        
-from ADS7830 import *
-adc=ADS7830()
+
 def test_Adc():
+    adc=ads()
     try:
-        while True:
+        for i in range(5):
             Power=adc.readAdc(0)/255.0*5.0*3
             print ("The battery voltage is "+str(Power)+"V")
             time.sleep(1)
@@ -82,11 +81,10 @@ def test_Adc():
     except KeyboardInterrupt:
         print ("\nEnd of program")
 
-from Buzzer import *
-buzzer=Buzzer()
 def test_Buzzer():
+    buzzer=buzzer()
     try:
-        buzzer.run('1')
+        buzzer.run('.1')
         time.sleep(1)
         print ("1S")
         time.sleep(1)
@@ -100,10 +98,9 @@ def test_Buzzer():
         print ("\nEnd of program")
      
 # Main program logic follows:
-if __name__ == '__main__':
-
+def old():
     print ('Program is starting ... ')
-    import sys
+    
     if len(sys.argv)<2:
         print ("Parameter error: Please assign the device")
         exit() 
@@ -117,6 +114,28 @@ if __name__ == '__main__':
         test_Adc()  
     elif sys.argv[1] == 'Buzzer':   
         test_Buzzer() 
+
+def main():
+    print("Starting Program ...")
+    time.sleep(1)
+    print("Testing Batteries ...")
+    try:
+        test_Adc()
+    except:
+        print("Failed ADC Test.")
+    print("Testing Buzzer ...")
+    try:
+        test_Buzzer()
+    except:
+        print("Buzzer tests failed.")
+    print("End of test program.")
+    
+
+if __name__ == '__main__':
+    # old()
+    main()
+
+    
 
 
         

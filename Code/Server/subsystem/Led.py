@@ -1,6 +1,6 @@
 # -*-coding: utf-8 -*-
 import time
-from rpi_ws281x import *
+from rpi_ws281x import Adafruit_NeoPixel, Color
 
 # LED strip configuration:
 LED_COUNT      = 7      # Number of LED pixels.

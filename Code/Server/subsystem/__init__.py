@@ -8,5 +8,6 @@ from .Kalman import Kalman_filter as kalman_filter
 from .Servo import Servo as servo
 from .PID import Incremental_PID as pid
 from .Led import Led as LED
+from .Led import Color
 from .Ultrasonic import Ultrasonic as sonar
 from .ui_server import Ui_server as server_ui
